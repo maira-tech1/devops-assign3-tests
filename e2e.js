@@ -80,7 +80,7 @@ async function runTests() {
         await driver.findElement(By.id('password')).clear();
         await driver.findElement(By.id('password')).sendKeys('securepass123');
         await driver.findElement(By.id('loginBtn')).click();
-        await sleep(2000);
+        await sleep(3000);
         await dismissAlert(driver);
         currentUrl = await driver.getCurrentUrl();
         logTest("Test 5: Login successful and redirected to dashboard", currentUrl.includes('/dashboard'));
