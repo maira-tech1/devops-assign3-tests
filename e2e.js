@@ -80,12 +80,13 @@ async function runTests() {
         await driver.findElement(By.id('password')).clear();
         await driver.findElement(By.id('password')).sendKeys('securepass123');
         await driver.findElement(By.id('loginBtn')).click();
-        await sleep(3000);
+        await sleep(5000);
         await dismissAlert(driver);
         currentUrl = await driver.getCurrentUrl();
         logTest("Test 5: Login successful and redirected to dashboard", currentUrl.includes('/dashboard'));
 
         // Test 6: Verify ERP Name in Dashboard Navigation
+        await sleep(3000);
         let navText = await driver.findElement(By.tagName('nav')).getText();
         logTest("Test 6: Dashboard displays correct ERP Name", navText.includes('Nexus ERP System'));
 
