@@ -73,7 +73,7 @@ async function runTests() {
         currentUrl = await driver.getCurrentUrl();
         logTest("Test 4: Register new user successfully", currentUrl.includes('/'));
 
-        // Test 5: Login with newly created user
+        // Test 5
         await driver.get(`${baseUrl}/`);
         await driver.findElement(By.id('email')).clear();
         await driver.findElement(By.id('email')).sendKeys(testUser);
@@ -85,10 +85,14 @@ async function runTests() {
         currentUrl = await driver.getCurrentUrl();
         logTest("Test 5: Login successful and redirected to dashboard", currentUrl.includes('/dashboard'));
 
-        // Test 6: Verify ERP Name in Dashboard Navigation
-        await sleep(3000);
+// Test 6
+        try {
+        await driver.wait(until.elementLocated(By.tagName('nav')), 10000);
         let navText = await driver.findElement(By.tagName('nav')).getText();
         logTest("Test 6: Dashboard displays correct ERP Name", navText.includes('Nexus ERP System'));
+        } catch(e) {
+            logTest("Test 6: Dashboard displays correct ERP Name", false);
+        }
 
         // Test 7: Verify Task Management Sidebar Module exists
         let sidebarText = await driver.findElement(By.className('w-1/4')).getText();
